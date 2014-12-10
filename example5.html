@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	  <!-- This bit here is for the web-browser - we won't be changing it -->
+    <meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Example 5 - Our Second Map</title>
+
+    <!-- Bootstrap --> <!-- We shouldn't need to change these very much 
+    over the course of all of the examples -->
+    <!-- This is where we link directly to the Bootstrap code -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="jquery/jquery-1.11.1.min.js"></script>
+    
+    
+	<!-- This is where we link to the Leaflet CSS and Leaflet JS -->
+	<link rel="stylesheet" href="leaflet/leaflet.css" />
+	<script src="leaflet/leaflet.js"></script>
+
+</head>
+<body>
+
+	<div class="container">
+	<div class="row">
+		
+		<h1>This is our 2nd web-based map</h1>
+		<p class = "lead">
+		Two places to have some dinner on the Maynooth University Campus
+		</p>
+		
+		<div id="map"  style="height: 800px;"></div>
+	
+	</div>
+	</div>
+
+<!-- Now for our Javascript for Leafet and our mapping application-->
+	<script>
+<!-- this is the map we are using -->
+var MapQuestOpen_OSM = L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpeg', {
+	attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+	subdomains: '1234'
+});
+
+<!-- this is the Javascript to setup the map -->
+<!-- The [latitude longitude] is specified for the center of the map -->
+<!-- zoom - Several levels 1 ... 16 -->
+var map = L.map('map', {
+    center: new L.LatLng(53.38157, -6.59080),
+    zoom: 15,
+    layers: [MapQuestOpen_OSM]
+});	
+
+var marker = L.marker([53.38450, -6.60376]).addTo(map);
+var marker2 = L.marker([53.37908, -6.59730]).addTo(map);
+
+<!-- This adds the base-layer map to our container ->
+var baseMaps = {"MapQuest Open": MapQuestOpen_OSM};
+L.control.layers(baseMaps).addTo(map);	
+
+	</script>	
+	
+
+  </body>
+</html>

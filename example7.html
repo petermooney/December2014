@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	  <!-- This bit here is for the web-browser - we won't be changing it -->
+    <meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Example 7 - Our Fourth Map</title>
+
+    <!-- Bootstrap --> <!-- We shouldn't need to change these very much 
+    over the course of all of the examples -->
+    <!-- This is where we link directly to the Bootstrap code -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="jquery/jquery-1.11.1.min.js"></script>
+    
+    
+	<!-- This is where we link to the Leaflet CSS and Leaflet JS -->
+	<link rel="stylesheet" href="leaflet/leaflet.css" />
+	<script src="leaflet/leaflet.js"></script>
+
+</head>
+<body>
+
+	<div class="container">
+	<div class="row">
+		
+		<h1>This is our 4th web-based map</h1>
+		<p class = "lead">
+		Looking at Polygons
+		</p>
+		
+		<div id="map"  style="height: 800px;"></div>
+	
+	</div>
+	</div>
+
+<!-- Now for our Javascript for Leafet and our mapping application-->
+	<script>
+<!-- this is the map we are using -->
+var MapQuestOpen_OSM = L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpeg', {
+	attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+	subdomains: '1234'
+});
+
+<!-- this is the Javascript to setup the map -->
+<!-- The [latitude longitude] is specified for the center of the map -->
+<!-- zoom - Several levels 1 ... 16 -->
+var map = L.map('map', {
+    center: new L.LatLng(53.3774812824388, -6.516407015151344),
+    zoom: 13, layers: [MapQuestOpen_OSM]});	
+
+	var INTEL = L.polygon([
+		[53.37471631332996, -6.529539110488258],
+		[53.37268087414204, -6.519110681838356],
+		[53.37009482997908, -6.5080599806969985],
+		[53.37287290086236, -6.506171705550514],
+		[53.37603481636035, -6.517115118331276],
+		[53.3774812824388, -6.516407015151344],
+		[53.378543699679156, -6.520548345870338],
+		[53.378850899724235, -6.529024126357399],
+		[53.37471631332996, -6.529539110488258],
+	]).addTo(map);
+	
+	INTEL.bindPopup("<h1>This is the world famous INTEL Campus at Leixlip</h1>. This polygon shows an outline of the campus area");	
+	
+	var NorthCampus = L.polygon([
+	[53.38784823667833, -6.606409549713135],
+	[53.3830106009008, -6.6043925285339355],
+	[53.38253704616908, -6.608362197875977],
+	[53.38178190745818, -6.608598232269287],
+	[53.38225547058848, -6.599006652832031],
+	[53.38270343086418, -6.595659255981445],
+	[53.384917565293634, -6.59778356552124],
+	[53.38583902083523, -6.59604549407959],
+	[53.38583902083523, -6.59604549407959],
+	[53.38784823667833, -6.606409549713135]
+	],{color: '#FFFF33'}).addTo(map);
+	
+	NorthCampus.bindPopup("<h2>This is the north campus of NUIM</h2>");
+	
+
+<!-- This adds the base-layer map to our container ->
+var baseMaps = {"MapQuest Open": MapQuestOpen_OSM};
+L.control.layers(baseMaps).addTo(map);	
+
+	</script>	
+	
+
+  </body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	  <!-- This bit here is for the web-browser - we won't be changing it -->
+    <meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Example -GeoJson</title>
+
+    <!-- Bootstrap --> <!-- We shouldn't need to change these very much 
+    over the course of all of the examples -->
+    <!-- This is where we link directly to the Bootstrap code -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="jquery/jquery-1.11.1.min.js"></script>
+    
+    
+	<!-- This is where we link to the Leaflet CSS and Leaflet JS -->
+	<link rel="stylesheet" href="leaflet/leaflet.css" />
+	<script src="leaflet/leaflet.js"></script>
+
+</head>
+<body>
+
+	<div class="container">
+	<div class="row">
+		
+		<h1>This is our 1st Map with GeoJSON</h1>
+		<p class = "lead">
+		Looking at GeoJSON
+		</p>
+		
+		<div id="map"  style="height: 800px;"></div>
+	
+	</div>
+	</div>
+
+<!-- Now for our Javascript for Leafet and our mapping application-->
+	<script>
+<!-- this is the map we are using -->
+var MapQuestOpen_OSM = L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpeg', {
+	attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+	subdomains: '1234'
+});
+
+<!-- this is the Javascript to setup the map -->
+<!-- The [latitude longitude] is specified for the center of the map -->
+<!-- zoom - Several levels 1 ... 16 -->
+var map = L.map('map', {
+    center: new L.LatLng(53.3774812824388, -6.516407015151344),
+    zoom: 4, layers: [MapQuestOpen_OSM]});	
+
+  
+  
+  $.getJSON("./airports.geojson",
+  
+function(data) {
+    var geojson = L.geoJson(data);
+    geojson.addTo(map);
+  }
+  );
+
+    
+	
+
+<!-- This adds the base-layer map to our container ->
+var baseMaps = {"MapQuest Open": MapQuestOpen_OSM};
+L.control.layers(baseMaps).addTo(map);	
+
+	</script>	
+	
+
+  </body>
+</html>
